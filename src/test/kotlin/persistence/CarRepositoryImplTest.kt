@@ -7,13 +7,13 @@ import org.junit.jupiter.api.assertThrows
 import persistence.exception.DuplicateKeyException
 import kotlin.test.assertContains
 
-class CarRepositoryTest {
+class CarRepositoryImplTest {
 
-    private lateinit var carRepository: CarRepository
+    private lateinit var carRepositoryImpl: CarRepositoryImpl
 
     @BeforeEach
     fun init() {
-        carRepository = CarRepository()
+        carRepositoryImpl = CarRepositoryImpl()
     }
 
     @Test
@@ -22,25 +22,25 @@ class CarRepositoryTest {
         val car = Car("name")
 
         //when
-        carRepository.insert(car)
+        carRepositoryImpl.insert(car)
 
         //then
-        val cars = carRepository.findAll()
+        val cars = carRepositoryImpl.findAll()
         assertContains(cars, car)
     }
 
     @Test
     fun `차 저장 시 이름이 중복되었을 경우 예외가 발생한다`() {
         //given
-        val name = "duplicateName"
+        val name = "name"
         val car1 = Car(name)
-        carRepository.insert(car1)
+        carRepositoryImpl.insert(car1)
 
         //when
         //then
         assertThrows<DuplicateKeyException> {
             val car2 = Car(name)
-            carRepository.insert(car2)
+            carRepositoryImpl.insert(car2)
         }
     }
 }
