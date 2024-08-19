@@ -1,7 +1,12 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import application.RacingService
+import application.RandomIntNumberGenerator
+import persistence.CarRepositoryImpl
+import presentation.RacingController
+import view.InputView
+import view.OutputView
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main() {
+    val racingService = RacingService(CarRepositoryImpl(), RandomIntNumberGenerator())
+    val racingController = RacingController(racingService, InputView(), OutputView())
+    racingController.start()
 }

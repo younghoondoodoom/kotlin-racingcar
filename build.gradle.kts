@@ -12,9 +12,14 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    testImplementation ("org.junit.jupiter:junit-jupiter-api")
+    testImplementation ("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.4.3")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:4.4.3")
+    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine")
 }
 
-tasks.test {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 
